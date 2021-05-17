@@ -42,6 +42,11 @@ impl Memory {
 		self.len() == 0
 	}
 
+	/// Return the full memory.
+	pub fn data(&self) -> &Vec<u8> {
+		&self.data
+	}
+
 	/// Resize the memory, making it cover the memory region of `offset..(offset
 	/// + len)`, with 32 bytes as the step. If the length is zero, this function
 	/// does nothing.
@@ -100,6 +105,10 @@ impl Memory {
 		value: &[u8],
 		target_size: Option<usize>
 	) -> Result<(), ExitFatal> {
+		if value.is_empty() {
+			return Ok(())
+		}
+		
 		let target_size = target_size.unwrap_or(value.len());
 
 		if offset.checked_add(target_size)
