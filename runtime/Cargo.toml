@@ -1,6 +1,6 @@
 [package]
 name = "evm-runtime"
-version = "0.26.0-clover"
+version = "0.27.0-clover"
 license = "Apache-2.0"
 authors = ["Wei Tang <hi@that.world>", "Parity Technologies <admin@parity.io>"]
 description = "SputnikVM - a Portable Blockchain Virtual Machine"
@@ -12,7 +12,11 @@ edition = "2018"
 evm-core = { path = "../core", default-features = false }
 primitive-types = { version = "0.9", default-features = false }
 sha3 = { version = "0.8", default-features = false }
+environmental = { version = "1.1.2", default-features = false, optional = true}
 
 [features]
 default = ["std"]
-std = ["evm-core/std", "primitive-types/std", "sha3/std"]
+std = ["evm-core/std", "primitive-types/std", "sha3/std", "environmental/std"]
+tracing = [
+  "environmental"
+]
